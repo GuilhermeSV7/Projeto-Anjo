@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#10131a">
+  <title>MiniJogos — Avaliação de Atenção</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main id="app">
+  <section id="home" class="screen active">
+    <div class="hero">
+      <div class="character" aria-hidden="true">
+        <div class="head"></div><div class="body"></div>
+        <div class="arm left"></div><div class="arm right"></div>
+      </div>
+      <div>
+        <p class="eyebrow">AVALIAÇÃO DE ATENÇÃO</p>
+        <h1>MiniJogos</h1>
+        <p class="subtitle">Desafios rápidos para observar atenção, percepção e tomada de decisão.</p>
+      </div>
+    </div>
+
+    <div class="menu-grid">
+      <button class="game-card" data-screen="traffic">
+        <span class="card-icon">🚦</span>
+        <span><strong>Semáforo</strong><small>Controle o cruzamento durante 1 minuto e reaja aos carros.</small></span>
+      </button>
+      <button class="game-card" data-screen="cards">
+        <span class="card-icon">🃏</span>
+        <span><strong>Mais ou Menos</strong><small>Observe as cartas e indique qual lado possui mais itens.</small></span>
+      </button>
+      <button class="game-card" data-screen="attention">
+        <span class="card-icon">👀</span>
+        <span><strong>Onde está?</strong><small>Observe o alvo, acompanhe o movimento e tente lembrar onde ele ficou.</small></span>
+      </button>
+    </div>
+    <p class="footer-note">O objetivo é observar o desempenho durante o desafio, não competir por um recorde.</p>
+  </section>
+
+  <section id="traffic" class="screen">
+    <div class="topbar">
+      <button class="back" data-screen="home">← Menu</button>
+      <div><span class="game-title">Semáforo</span><span id="traffic-time">Tempo: 60s</span></div>
+      <button id="traffic-start" class="small-btn">Começar</button>
+    </div>
+
+    <div class="traffic-info">
+      <span>Pontos: <b id="traffic-score">0</b></span>
+    </div>
+
+    <div id="traffic-board" class="traffic-board">
+      <div class="road horizontal"></div><div class="road vertical"></div>
+      <div class="lane-mark h1"></div><div class="lane-mark h2"></div>
+      <div class="lane-mark v1"></div><div class="lane-mark v2"></div>
+      <div class="intersection"></div>
+        <div class="horizontal-status">
+          <div class="status-title">CONTROLE DE TRÁFEGO</div>
+          <div class="status-row"><span class="status-dot"></span><b>HORIZONTAL</b></div>
+          <small>ESQUERDA ↔ DIREITA</small>
+        </div>
+
+      <button id="traffic-light" class="traffic-light" title="Mudar o semáforo" aria-label="Mudar direção liberada">
+          <div class="horizontal-status">
+            <div class="status-title">EIXO LIBERADO</div>
+            <div class="status-row">
+              <span class="status-dot" id="axis-status-dot"></span>
+              <strong id="axis-status">HORIZONTAL</strong>
+            </div>
+            <small>O semáforo alterna entre horizontal e vertical.</small>
+          </div>
+        
+        <span class="lamp red"></span><span class="lamp yellow"></span><span class="lamp green"></span>
+      </button>
+
+      <div class="direction-label left-label">←</div><div class="direction-label right-label">→</div>
+      <div class="direction-label top-label">↑</div><div class="direction-label bottom-label">↓</div>
+    </div>
+    <p id="traffic-message" class="message">Durante 1 minuto, libere um eixo por vez e observe os dois sentidos.</p>
+  </section>
+
+  <section id="traffic-result" class="screen result-screen">
+    <div class="result-box">
+      <p class="eyebrow">RESULTADO</p>
+      <h2>Semáforo finalizado</h2>
+      <div id="traffic-result-content"></div>
+      <button class="primary-btn" data-screen="traffic">Fazer novamente</button>
+      <button class="secondary-btn" data-screen="home">Voltar ao menu</button>
+    </div>
+  
+          <div class="result-metrics">
+            <div><span>Pontuação</span><strong id="traffic-final-score">0</strong></div>
+            <div><span>Pontuação máxima</span><strong id="traffic-max-score">0</strong></div>
+          </div>
+        </section>
+
+  <section id="cards" class="screen">
+    <div class="topbar">
+      <button class="back" data-screen="home">← Menu</button>
+      <div><span class="game-title">Mais ou Menos</span><span id="cards-round">Rodada: 1</span></div>
+      <span></span>
+    </div>
+
+    <div class="cards-info">
+      <span>Acertos: <b id="cards-score">0</b></span>
+    </div>
+
+    <div class="cards-game">
+      <p class="instruction">Observe a carta e deslize para o lado que tem <strong>mais</strong> itens.</p>
+
+      <div id="card-stage" class="card-stage">
+        <div id="choice-card" class="reigns-card">
+          <div class="card-inner"></div>
+        </div>
+      </div>
+
+      <div class="swipe-actions">
+        <button id="choose-left" class="choice-btn">← Esquerda</button>
+        <button id="choose-right" class="choice-btn">Direita →</button>
+      </div>
+      <p id="cards-message" class="message"></p>
+    </div>
+  </section>
+
+  <section id="cards-result" class="screen result-screen">
+    <div class="result-box">
+      <p class="eyebrow">RESULTADO</p>
+      <h2>Cartas finalizadas</h2>
+      <div id="cards-result-content"></div>
+      <button class="primary-btn" data-screen="cards">Fazer novamente</button>
+      <button class="secondary-btn" data-screen="home">Voltar ao menu</button>
+    </div>
+  
+          <div class="result-metrics">
+            <div><span>Pontuação</span><strong id="cards-final-score">0</strong></div>
+            <div><span>Pontuação máxima</span><strong id="cards-max-score">20</strong></div>
+          </div>
+        </section>
+
+  
+  <section id="attention" class="screen">
+    <div class="topbar">
+      <button class="back" data-screen="home">← Menu</button>
+      <div><span class="game-title">Onde está?</span><span id="attention-round">Rodada: 1/8</span></div>
+      <button id="attention-start" class="small-btn" type="button">Começar</button>
+    </div>
+
+    <div class="attention-info">
+      <span>Pontos: <b id="attention-score">0</b></span>
+      <span>Alvo: <b id="attention-target-name">—</b></span>
+    </div>
+
+    <div class="attention-game">
+      <p id="attention-instruction" class="instruction">Clique em Começar para iniciar.</p>
+      <div id="attention-board" class="attention-board"></div>
+      <p id="attention-message" class="message"></p>
+    </div>
+  </section>
+
+  <section id="attention-result" class="screen result-screen">
+    <div class="result-box">
+      <p class="eyebrow">RESULTADO</p>
+      <h2>Desafio finalizado</h2>
+      <div class="result-stats">
+        <div class="stat"><b id="attention-final-score">0</b><span>pontuação</span></div>
+        <div class="stat"><b id="attention-max-score">8</b><span>pontuação máxima</span></div>
+      </div>
+      <button class="primary-btn" data-screen="attention" type="button">Fazer novamente</button>
+      <button class="secondary-btn" data-screen="home" type="button">Voltar ao menu</button>
+    </div>
+  </section>
+
+</main>
+<script src="js/app.js"></script>
+</body>
+</html>
